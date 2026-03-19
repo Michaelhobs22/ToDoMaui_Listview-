@@ -1,0 +1,37 @@
+<VerticalStackLayout Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+    <VerticalStackLayout Padding="10" Spacing="10" BackgroundColor="White" Margin="0,0,0,10">
+        <Entry x:Name="titleEntry" Placeholder="Title" PlaceholderColor="Gray" TextColor="Black" Keyboard="Text" ReturnType="Next" MaxLength="50"/>  
+        <Editor x:Name="detailsEditor" Placeholder="Details" PlaceholderColor="Gray" TextColor="Black" MaxLength="240" Keyboard="Text" HeightRequest="100"/>
+        <Button x:Name="addBtn" IsVisible="True" Text="Add" TextColor="Black" BackgroundColor="LightBlue" Clicked="AddToDoItem"/> 
+        <Button x:Name="editBtn" IsVisible="False" Text="Edit" TextColor="Black" BackgroundColor="lightgray" Clicked="EditToDoItem"/> 
+        <Button x:Name="cancelBtn" IsVisible="False" Text="Cancel Edit" TextColor="Black" BackgroundColor="LightCoral" Clicked="CancelEdit"/> 
+    </VerticalStackLayout>    
+
+    <ListView x:Name="todoLV" HorizontalOptions="Fill" VerticalOptions="FillAndExpand" HasUnevenRows="False"
+        SeparatorVisibility="Default" BackgroundColor="White" ItemSelected="TodoLV_OnItemSelected"
+        ItemTapped="todoLV_ItemTapped">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid VerticalOptions="FillAndExpand" RowSpacing="5" HorizontalOptions="FillAndExpand" Margin="10,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                                
+                        <Label Grid.Row="0" Grid.Column="0" LineBreakMode="TailTruncation" FontSize="16"
+                               Text="{Binding title}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                        <Label Grid.Row="1" Grid.Column="0" LineBreakMode="TailTruncation" FontSize="14"
+                               Text="{Binding detail}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                        <Button Text="Delete" BackgroundColor="LightCoral" ClassId="{Binding id}" 
+                                Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Clicked="DeleteToDoItem"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</VerticalStackLayout>
